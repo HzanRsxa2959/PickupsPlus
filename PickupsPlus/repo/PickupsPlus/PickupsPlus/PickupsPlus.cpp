@@ -73,7 +73,11 @@ public:
 
 		blinktime = 0.0f;
 
-		Events::gameProcessEvent += [] {
+		CdeclEvent <AddressList<
+			// void __cdecl CPickups::Update()
+			0x53C0AD, H_CALL // void __cdecl CGame::Process()
+		>, PRIORITY_AFTER, ArgPickNone, void()> pickupsUpdateEvent;
+		pickupsUpdateEvent += [] {
 			if (TestCheat("RSPKP")) {
 				loadINI();
 
